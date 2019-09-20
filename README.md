@@ -6,9 +6,7 @@
 
 This is a [fonk](https://github.com/Lemoncode/fonk) microlibrary that brings validation capabilities to:
 
-// TODO: Update description and example.
-
-- Validate if a field of a form ....
+- Validate if a field of a form is a positive number
 
 How to add it to an existing form validation schema:
 
@@ -28,6 +26,21 @@ import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 
 const validationSchema = {
   price: [positiveNumber.validator],
+};
+```
+
+We can specify if the validator allows zero (true by default):
+
+```javascript
+import { minNumber } from '@lemoncode/fonk-min-number-validator';
+
+const validationSchema = {
+  price: [
+    {
+      validator: positiveNumber.validator,
+      customArgs: { allowZero: true },
+    },
+  ],
 };
 ```
 
