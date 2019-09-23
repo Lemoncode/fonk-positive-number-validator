@@ -1,6 +1,7 @@
-import { FieldValidationFunctionSync } from '@lemoncode/fonk';
-import { CustomValidatorArgs } from './validator.model';
-import { isDefined, buildCustomMessage } from './validator.business';
+import {
+  FieldValidationFunctionSync,
+  parseMessageWithCustomArgs,
+} from '@lemoncode/fonk';
 
 const VALIDATOR_TYPE = 'POSITIVE_NUMBER';
 
@@ -15,6 +16,12 @@ const validateType = value => typeof value === 'number';
 
 const validate = (value, args: CustomValidatorArgs) =>
   args.allowZero ? value >= 0 : value > 0;
+
+const isDefined = value => value !== void 0 && value !== null && value !== '';
+
+interface CustomValidatorArgs {
+  allowZero?: boolean;
+}
 
 export const validator: FieldValidationFunctionSync<
   CustomValidatorArgs
@@ -37,7 +44,7 @@ export const validator: FieldValidationFunctionSync<
     succeeded,
     message: succeeded
       ? ''
-      : buildCustomMessage((message as string) || defaultMessage, args),
+      : parseMessageWithCustomArgs((message as string) || defaultMessage, args),
     type: VALIDATOR_TYPE,
   };
 };
