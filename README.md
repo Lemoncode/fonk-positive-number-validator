@@ -32,7 +32,7 @@ const validationSchema = {
 We can specify if the validator allows zero (true by default):
 
 ```javascript
-import { minNumber } from '@lemoncode/fonk-min-number-validator';
+import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 
 const validationSchema = {
   price: [
