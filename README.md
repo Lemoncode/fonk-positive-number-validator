@@ -51,7 +51,7 @@ You can customize the error message displayed in two ways:
 ```javascript
 import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 
-positiveNumber.setErrorMessage('El campo debe de ser numérico');
+positiveNumber.setErrorMessage('El campo debe de ser un número positivo');
 ```
 
 - Locally just override the error message for this validationSchema:
