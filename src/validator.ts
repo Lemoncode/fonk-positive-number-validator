@@ -1,7 +1,4 @@
-import {
-  FieldValidationFunctionSync,
-  parseMessageWithCustomArgs,
-} from '@lemoncode/fonk';
+import { FieldValidationFunctionSync } from '@lemoncode/fonk';
 
 const VALIDATOR_TYPE = 'POSITIVE_NUMBER';
 
@@ -42,9 +39,7 @@ export const validator: FieldValidationFunctionSync<
 
   return {
     succeeded,
-    message: succeeded
-      ? ''
-      : parseMessageWithCustomArgs(message as string, args),
+    message: succeeded ? '' : (message as string),
     type: VALIDATOR_TYPE,
   };
 };
