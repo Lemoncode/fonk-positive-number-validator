@@ -1,27 +1,50 @@
-import { FieldValidationFunctionSync } from '@lemoncode/fonk';
-import { CustomValidatorArgs } from './validator.model';
-import { isDefined, buildCustomMessage } from './validator.business';
+import {
+  FieldValidationFunctionSync,
+  parseMessageWithCustomArgs,
+} from '@lemoncode/fonk';
 
-// TODO: Add validator type
-const VALIDATOR_TYPE = '';
+const VALIDATOR_TYPE = 'POSITIVE_NUMBER';
 
-// TODO: Add default message
-let defaultMessage = '';
+let defaultMessage = 'The value must be a positive number';
 export const setErrorMessage = message => (defaultMessage = message);
+
+const defaultCustomArgs: CustomValidatorArgs = {
+  allowZero: true,
+};
+
+const validateType = value => typeof value === 'number';
+
+const validate = (value, args: CustomValidatorArgs) =>
+  args.allowZero ? value >= 0 : value > 0;
+
+const isDefined = value => value !== void 0 && value !== null && value !== '';
+
+interface CustomValidatorArgs {
+  allowZero?: boolean;
+}
 
 export const validator: FieldValidationFunctionSync<
   CustomValidatorArgs
 > = fieldValidatorArgs => {
-  const { value, message = defaultMessage } = fieldValidatorArgs;
+  const {
+    value,
+    message = defaultMessage,
+    customArgs = defaultCustomArgs,
+  } = fieldValidatorArgs;
 
-  // TODO: Add validator
-  const succeeded = !isDefined(value) || ...;
+  const args: CustomValidatorArgs = {
+    ...defaultCustomArgs,
+    ...customArgs,
+  };
+
+  const succeeded =
+    !isDefined(value) || (validateType(value) && validate(value, args));
 
   return {
     succeeded,
     message: succeeded
       ? ''
-      : buildCustomMessage((message as string) || defaultMessage, args),
+      : parseMessageWithCustomArgs(message as string, args),
     type: VALIDATOR_TYPE,
   };
 };
