@@ -14,7 +14,7 @@ We have the following form model:
 
 ```
 const myFormValues = {
-  product : 'shoes',
+  product: 'shoes',
   price: 20,
 }
 ```
@@ -25,7 +25,9 @@ We can add a positiveNumber validation to the myFormValues
 import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 
 const validationSchema = {
-  price: [positiveNumber.validator],
+  field: {
+    price: [positiveNumber.validator],
+  },
 };
 ```
 
@@ -35,12 +37,14 @@ We can specify if the validator allows zero (true by default):
 import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 
 const validationSchema = {
-  price: [
-    {
-      validator: positiveNumber.validator,
-      customArgs: { allowZero: true },
-    },
-  ],
+  field: {
+    price: [
+      {
+        validator: positiveNumber.validator,
+        customArgs: { allowZero: true },
+      },
+    ],
+  },
 };
 ```
 
@@ -60,12 +64,14 @@ positiveNumber.setErrorMessage('El campo debe de ser un número positivo');
 import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 
 const validationSchema = {
-  price: [
-    {
-      validator: positiveNumber.validator,
-      message: 'Error message only updated for the validation schema',
-    },
-  ],
+  field: {
+    price: [
+      {
+        validator: positiveNumber.validator,
+        message: 'Error message only updated for the validation schema',
+      },
+    ],
+  },
 };
 ```
 
