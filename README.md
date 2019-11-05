@@ -1,6 +1,6 @@
 # fonk-positive-number-validator
 
-[![CircleCI](https://badgen.net/github/status/Lemoncode/fonk-positive-number-validator/master/ci?icon=circleci&label=circleci)](https://circleci.com/gh/Lemoncode/fonk-positive-number-validator/tree/master)
+[![CircleCI](https://badgen.net/github/status/Lemoncode/fonk-positive-number-validator/master?icon=circleci&label=circleci)](https://circleci.com/gh/Lemoncode/fonk-positive-number-validator/tree/master)
 [![NPM Version](https://badgen.net/npm/v/@lemoncode/fonk-positive-number-validator?icon=npm&label=npm)](https://www.npmjs.com/package/@lemoncode/fonk-positive-number-validator)
 [![bundle-size](https://badgen.net/bundlephobia/min/@lemoncode/fonk-positive-number-validator)](https://bundlephobia.com/result?p=@lemoncode/fonk-positive-number-validator)
 
@@ -8,13 +8,19 @@ This is a [fonk](https://github.com/Lemoncode/fonk) microlibrary that brings val
 
 - Validate if a field of a form is a positive number
 
+How to install it:
+
+```bash
+npm install @lemoncode/fonk-positive-number-validator --save
+```
+
 How to add it to an existing form validation schema:
 
 We have the following form model:
 
 ```
 const myFormValues = {
-  product : 'shoes',
+  product: 'shoes',
   price: 20,
 }
 ```
@@ -25,7 +31,9 @@ We can add a positiveNumber validation to the myFormValues
 import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 
 const validationSchema = {
-  price: [positiveNumber.validator],
+  field: {
+    price: [positiveNumber.validator],
+  },
 };
 ```
 
@@ -55,12 +63,14 @@ You can specify the custom arguments in two ways:
 import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 
 const validationSchema = {
-  price: [
-    {
-      validator: positiveNumber.validator,
-      customArgs: { allowZero: true },
-    },
-  ],
+  field: {
+    price: [
+      {
+        validator: positiveNumber.validator,
+        customArgs: { allowZero: true },
+      },
+    ],
+  },
 };
 ```
 
@@ -88,12 +98,14 @@ positiveNumber.setErrorMessage('El campo debe de ser un número positivo');
 import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 
 const validationSchema = {
-  price: [
-    {
-      validator: positiveNumber.validator,
-      message: 'Error message only updated for the validation schema',
-    },
-  ],
+  field: {
+    price: [
+      {
+        validator: positiveNumber.validator,
+        message: 'Error message only updated for the validation schema',
+      },
+    ],
+  },
 };
 ```
 
