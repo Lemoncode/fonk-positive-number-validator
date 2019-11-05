@@ -3,7 +3,12 @@ import { positiveNumber } from '@lemoncode/fonk-positive-number-validator';
 
 const validationSchema: ValidationSchema = {
   field: {
-    myField: [positiveNumber.validator],
+    myField: [
+      {
+        validator: positiveNumber.validator,
+        customArgs: { allowZero: true, strictTypes: true },
+      },
+    ],
   },
 };
 

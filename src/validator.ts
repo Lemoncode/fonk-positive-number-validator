@@ -8,20 +8,25 @@ const VALIDATOR_TYPE = 'POSITIVE_NUMBER';
 let defaultMessage = 'The value must be a positive number';
 export const setErrorMessage = message => (defaultMessage = message);
 
-const defaultCustomArgs: CustomValidatorArgs = {
-  allowZero: true,
-};
-
-const validateType = value => typeof value === 'number';
-
-const validate = (value, args: CustomValidatorArgs) =>
-  args.allowZero ? value >= 0 : value > 0;
-
-const isDefined = value => value !== void 0 && value !== null && value !== '';
-
 interface CustomValidatorArgs {
+  strictTypes?: boolean;
   allowZero?: boolean;
 }
+
+let defaultCustomArgs: CustomValidatorArgs = {
+  strictTypes: false,
+  allowZero: true,
+};
+export const setCustomArgs = (customArgs: Partial<CustomValidatorArgs>) =>
+  (defaultCustomArgs = { ...defaultCustomArgs, ...customArgs });
+
+const validateType = (value, args: CustomValidatorArgs) =>
+  !args.strictTypes || typeof value === 'number';
+
+const validate = (value, args: CustomValidatorArgs) =>
+  !isNaN(Number(value)) ? (args.allowZero ? value >= 0 : value > 0) : false;
+
+const isDefined = value => value !== void 0 && value !== null && value !== '';
 
 export const validator: FieldValidationFunctionSync<
   CustomValidatorArgs
@@ -38,7 +43,7 @@ export const validator: FieldValidationFunctionSync<
   };
 
   const succeeded =
-    !isDefined(value) || (validateType(value) && validate(value, args));
+    !isDefined(value) || (validateType(value, args) && validate(value, args));
 
   return {
     succeeded,
