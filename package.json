@@ -1,6 +1,6 @@
 {
   "name": "@lemoncode/fonk-positive-number-validator",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "This is a [fonk](https://github.com/Lemoncode/fonk) microlibrary that brings validation capabilities to validate if a field of a form is a positive number",
   "main": "dist/@lemoncode/fonk-positive-number-validator.cjs.js",
   "module": "dist/@lemoncode/fonk-positive-number-validator.esm.js",
