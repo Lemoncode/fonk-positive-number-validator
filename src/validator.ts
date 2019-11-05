@@ -24,7 +24,7 @@ const validateType = (value, args: CustomValidatorArgs) =>
   !args.strictTypes || typeof value === 'number';
 
 const validate = (value, args: CustomValidatorArgs) =>
-  !isNaN(Number(value)) ? (args.allowZero ? value >= 0 : value > 0) : false;
+  !isNaN(Number(value)) && (args.allowZero ? value >= 0 : value > 0);
 
 const isDefined = value => value !== void 0 && value !== null && value !== '';
 

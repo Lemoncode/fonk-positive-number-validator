@@ -46,7 +46,7 @@ export interface CustomValidatorArgs {
 }
 ```
 
-You need to know the default arguments:
+These are the default arguments:
 
 ```javascript
 let defaultCustomArgs: CustomValidatorArgs = {
